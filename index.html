@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===== Meta & Title ===== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author"
+  content="Kingsley Donatus" />
+  <title>Kingsley Donatus | Portfolio</title>
+
+  <!-- ===== Favicon ===== -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <!-- ===== Fonts & Icons ===== -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ===== CSS & JS ===== -->
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+</head>
+
+<body>
+  <!-- ===== Header / Navbar ===== -->
+  <header>
+    <nav>
+        <h2 class="logo">Port<span class="highlight">Folio</span></h2>
+
+      <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn">Hire Me</a>
+
+      <!-- Mobile Menu Icon (for later JS toggle) -->
+      <div class="menu-toggle"><i class='bx bx-menu'></i></div>
+  
+          </nav> 
+
+  </header>
+
+  <!-- ===== Home Section ===== -->
+  <section id="home" class="home">
+    <div class="main-text">
+      <h3>
+        Hello, I'm
+      </h3>
+      <h2>
+        Kingsley<span class="highlight"> Donatus</span></h2>
+      </h2>
+      <h3 class="typing-text"></h3>
+      <p>A passionate web developer creating modern, dynamic digital experiences.</p>
+      <div class="social-icons">
+        <a href="#" target="_blank"><i class="bx bxl-facebook"></i></a>
+        <a href="#" target="_blank"><i class="bx bxl-twitter"></i></a>
+        <a href="#" target="_blank"><i class="bx bxl-linkedin"></i></a>
+        <a href="#" target="_blank"><i class="bx bxl-github"></i></a>
+      </div>
+
+      <a href="html" class="btn">My Letter</a>
+    </div>
+  </section>
+
+  <!-- ===== About Section ===== -->
+  <section id="about" class="reveal">
+    <h2>About Me</h2>
+   <p>
+      Hi, I’m <strong>Kingsley Donatus</strong> — a self-taught web developer passionate about building clean, user-friendly, and meaningful digital experiences.
+    </p>
+    <p>
+      My journey into tech started with curiosity and a desire to understand how the web works. Since then, I’ve been learning and growing through hands-on projects, exploring both front-end and back-end development at my own pace.
+    </p>
+    <p>
+      I’m currently interested in opportunities like <strong>Cortex by OnePipe</strong>, where I can learn from experienced professionals, grow my skills in fintech and digital innovation, and contribute to creating smart, accessible solutions.
+    </p>
+    <p>
+      I believe in consistent learning, collaboration, and staying adaptable — values that guide me as I continue developing both as a person and a professional.
+    </p>
+  </section>
+
+  <!-- ===== Projects Section ===== -->
+  <section id="projects" class="reveal">
+    <h2>Projects</h2>
+
+    <div class="project-list">
+      <div class="card">
+        <h3>Full-Stack Roadmap</h3>
+        <p>A learning tracker for aspiring developers with localStorage and dark mode toggle.</p>
+      </div>
+<div class="card">
+  <h3>PetPal</h3>
+  <p>
+    <strong>PetPal AI</strong> is an intelligent, blockchain-enabled chat companion
+    designed to revolutionize how pet owners manage their animals’ health, training, and wellness.
+  </p>
+  <span class="coming-soon">🚧 Coming Soon</span>
+</div>
+
+      <div class="card">
+        <h3>Bible AI</h3>
+        <p>An intelligent Bible study assistant powered by RAG and vector search.</p>
+          <span class="coming-soon">🚧 Coming Soon</span>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact Section ===== -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form id="contactform" action="https://formspree.io/f/mblzbnbd" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <input type="hidden" name="_redirect" value="https://kingsfolio.netlify.app/thankyou.html" />
+
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+
+  <!-- ===== Toast Notification ===== -->
+  <div id="toast" class="toast">Message sent successfully!</div>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>© 2025 Kingsley Donatus. All rights reserved.</p>
+  </footer>
+
+  <!-- ===== Scroll-To-Top Button ===== -->
+  <a href="#home" class="scroll-top"><i class='bx bx-up-arrow-alt'></i></a>
+
+</body>
+</html>
