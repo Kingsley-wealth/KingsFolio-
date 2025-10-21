@@ -111,14 +111,17 @@
   <!-- ===== Contact Section ===== -->
 <section id="contact">
   <h2>Contact Me</h2>
-  <form id="contactform" action="https://formspree.io/f/mblzbnbd" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required />
+  <!-- Contact Form using Netlify Forms -->
+<form name="contact" method="POST" data-netlify="true">
+  <!-- Hidden input needed for Netlify -->
+  <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
     <textarea name="message" placeholder="Your Message" required></textarea>
-    <input type="hidden" name="_redirect" value="https://kingsfolio.netlify.app/thankyou.html" />
+    <input type="hidden" name="_redirect" value="https://kingsfolio1.netlify.app/thankyou.html" />
 
     <button type="submit">Send Message</button>
-  </form>
+  </form>
+
 </section>
 
 
