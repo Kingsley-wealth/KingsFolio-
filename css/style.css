@@ -267,11 +267,14 @@ input:focus, textarea:focus {
   color: white;
   padding: 12px 20px;
   border-radius: 6px;
-  animation: fadeInOut 3s forwards;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  animation: toastSlide 3s ease-in-out forwards;
+  z-index: 9999;
+
 }
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(20px); }
-  20%, 80% { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translateY(30px); }
+  15%, 85% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(20px); }
 }
 /* === Footer === */

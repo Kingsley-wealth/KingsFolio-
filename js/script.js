@@ -119,16 +119,14 @@ if (menuToggle && navList) {
     });
   });
 }
-// === CONTACT FORM HANDLING (Safe for Netlify) ===
+// === CONTACT FORM HANDLING (with Toast + Redirect) ===
 document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
-
   if (!contactForm) return;
 
   const isNetlifyForm = contactForm.hasAttribute("data-netlify");
 
   contactForm.addEventListener("submit", async (e) => {
-    // 🚫 Only intercept if NOT using Netlify
     if (!isNetlifyForm) {
       e.preventDefault();
       const formData = new FormData(contactForm);
@@ -141,8 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (response.ok) {
-          // ✅ Local save for debugging or records
           saveMessageLocally(formData);
+          // ✅ Set success flag before redirect
+          localStorage.setItem("showSuccessToast", "true");
           window.location.href = "thankyou.html";
         } else {
           alert("Error sending message. Please try again.");
@@ -152,13 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("⚠️ Something went wrong!");
       }
     } else {
-      // ✅ Netlify auto-handles form submission — optional local save
       const formData = new FormData(contactForm);
       saveMessageLocally(formData);
+      localStorage.setItem("showSuccessToast", "true");
     }
   });
 
-  // Helper function for localStorage
   function saveMessageLocally(formData) {
     const message = {
       name: formData.get("name"),
@@ -166,18 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
       message: formData.get("message"),
       time: new Date().toLocaleString(),
     };
-    const savedMessages =
+    const saved =
       JSON.parse(localStorage.getItem("contactMessages")) || [];
-    savedMessages.push(message);
-    localStorage.setItem("contactMessages", JSON.stringify(savedMessages));
-  }
-});
-
-/* ---------- TOAST ON THANKYOU PAGE ---------- */
-window.addEventListener("DOMContentLoaded", () => {
-  const toast = document.querySelector(".toast");
-  if (toast) {
-    toast.style.display = "block";
-    setTimeout(() => (toast.style.display = "none"), 3500);
+    saved.push(message);
+    localStorage.setItem("contactMessages", JSON.stringify(saved));
   }
 });
