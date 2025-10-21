@@ -108,7 +108,7 @@
     </div>
   </section>
 
- <!-- ===== Contact Section ===== -->
+<!-- ===== Contact Section ===== -->
 <section id="contact">
   <h2>Contact Me</h2>
 
@@ -119,7 +119,6 @@
     method="POST"
     data-netlify="true"
     netlify-honeypot="bot-field"
-    action="/thankyou.html"
   >
     <!-- 🕵️ Hidden fields -->
     <input type="hidden" name="form-name" value="contact" />
@@ -132,15 +131,11 @@
     <input type="email" name="email" placeholder="Your Email" required />
     <textarea name="message" placeholder="Your Message" required></textarea>
 
-    <!-- ✅ Optional explicit redirect -->
-    <input
-      type="hidden"
-      name="_redirect"
-      value="https://kingsleyportfolio1.netlify.app/thankyou.html"
-    />
-
     <button type="submit">Send Message</button>
   </form>
+
+  <!-- 🔔 Toast Message -->
+  <div id="toast" class="toast-message">Message sent successfully ✅</div>
 </section>
 
 

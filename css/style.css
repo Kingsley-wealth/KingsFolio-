@@ -259,23 +259,21 @@ input:focus, textarea:focus {
 }
 /* === Toast Notification === */
 .toast {
-  display: none;
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: -60px;
+  right: 50%;
   background: var(--accent-color);
   color: white;
-  padding: 12px 20px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: 8px;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  animation: toastSlide 3s ease-in-out forwards;
-  z-index: 9999;
-
+  opacity: 0;
+  transition: all 0.4s ease;
+z-index: 9999;
 }
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(30px); }
-  15%, 85% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(20px); }
+.toast-message.show {
+  bottom: 30px;
+  opacity: 1;
 }
 /* === Footer === */
 footer {

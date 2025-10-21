@@ -119,54 +119,39 @@ if (menuToggle && navList) {
     });
   });
 }
-// === CONTACT FORM HANDLING (with Toast + Redirect) ===
+// === CONTACT FORM HANDLING (Stay on same page + Toast) ===
 document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
-  if (!contactForm) return;
-
-  const isNetlifyForm = contactForm.hasAttribute("data-netlify");
+  const toast = document.getElementById("toast");
+  if (!contactForm || !toast) return;
 
   contactForm.addEventListener("submit", async (e) => {
-    if (!isNetlifyForm) {
-      e.preventDefault();
-      const formData = new FormData(contactForm);
+    // Let Netlify handle the submission normally
+    e.preventDefault(); // ✅ optional: handle via fetch to stay on same page
 
-      try {
-        const response = await fetch(contactForm.action, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        });
+    const formData = new FormData(contactForm);
 
-        if (response.ok) {
-          saveMessageLocally(formData);
-          // ✅ Set success flag before redirect
-          localStorage.setItem("showSuccessToast", "true");
-          window.location.href = "thankyou.html";
-        } else {
-          alert("Error sending message. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("⚠️ Something went wrong!");
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        showToast();
+        contactForm.reset(); // clear inputs
+      } else {
+        alert("❌ There was an issue sending your message. Try again.");
       }
-    } else {
-      const formData = new FormData(contactForm);
-      saveMessageLocally(formData);
-      localStorage.setItem("showSuccessToast", "true");
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("⚠️ Network error. Please try again later.");
     }
   });
 
-  function saveMessageLocally(formData) {
-    const message = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-      time: new Date().toLocaleString(),
-    };
-    const saved =
-      JSON.parse(localStorage.getItem("contactMessages")) || [];
-    saved.push(message);
-    localStorage.setItem("contactMessages", JSON.stringify(saved));
+  // 🔔 Toast animation
+  function showToast() {
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
   }
 });
