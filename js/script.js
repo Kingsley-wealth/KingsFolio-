@@ -77,9 +77,10 @@ function navActiveOnScroll() {
     if (scrollY >= sectionTop + sectionHeight&& scrollY < sectionTop + sectionHeight) {
       navLinks.forEach(link => {
         link.classList.remove("active");
-        if (link.getAttribute("href") === `#${sectionId}`) {
-          link.classList.add("active");
+        if (link.getAttribute("href") === `#${sectionId}`) { link.classList.add("active");
         }
+          
+        
       });
     }
   });
@@ -102,7 +103,7 @@ window.addEventListener("load", toggleScrollTop);
 
 /* ---------- MOBILE MENU TOGGLE ---------- */
 const menuToggle = document.querySelector(".menu-toggle");
-const navList = document.querySelector(".nav-links");
+const navList = document.querySelector("nav ul li a");
 
 if (menuToggle && navList) {
   menuToggle.addEventListener("click", () => {
@@ -118,14 +119,18 @@ if (menuToggle && navList) {
     });
   });
 }
-// === CONTACT FORM (Formspree + Local Save + Redirect) ===
-document.addEventListener("DOMContentLoaded", function () {
+// === CONTACT FORM HANDLING (Safe for Netlify) ===
+document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
 
-  if (contactForm) {
-    contactForm.addEventListener("submit", async function (e) {
-      e.preventDefault(); // prevent page reload
+  if (!contactForm) return;
 
+  const isNetlifyForm = contactForm.hasAttribute("data-netlify");
+
+  contactForm.addEventListener("submit", async (e) => {
+    // 🚫 Only intercept if NOT using Netlify
+    if (!isNetlifyForm) {
+      e.preventDefault();
       const formData = new FormData(contactForm);
 
       try {
@@ -136,31 +141,43 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
-          // ✅ Save locally
-          const message = {
-            name: formData.get("name"),
-            email: formData.get("email"),
-            message: formData.get("message"),
-            time: new Date().toLocaleString(),
-          };
-
-          const savedMessages =
-            JSON.parse(localStorage.getItem("contactMessages")) || [];
-          savedMessages.push(message);
-          localStorage.setItem("contactMessages", JSON.stringify(savedMessages));
-
-          console.log("Message saved locally ✅");
-          console.log(JSON.parse(localStorage.getItem("contactMessages")));
-
-          // ✅ Redirect after success
+          // ✅ Local save for debugging or records
+          saveMessageLocally(formData);
           window.location.href = "thankyou.html";
         } else {
           alert("Error sending message. Please try again.");
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("Something went wrong!");
+        alert("⚠️ Something went wrong!");
       }
-    });
+    } else {
+      // ✅ Netlify auto-handles form submission — optional local save
+      const formData = new FormData(contactForm);
+      saveMessageLocally(formData);
+    }
+  });
+
+  // Helper function for localStorage
+  function saveMessageLocally(formData) {
+    const message = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+      time: new Date().toLocaleString(),
+    };
+    const savedMessages =
+      JSON.parse(localStorage.getItem("contactMessages")) || [];
+    savedMessages.push(message);
+    localStorage.setItem("contactMessages", JSON.stringify(savedMessages));
+  }
+});
+
+/* ---------- TOAST ON THANKYOU PAGE ---------- */
+window.addEventListener("DOMContentLoaded", () => {
+  const toast = document.querySelector(".toast");
+  if (toast) {
+    toast.style.display = "block";
+    setTimeout(() => (toast.style.display = "none"), 3500);
   }
 });

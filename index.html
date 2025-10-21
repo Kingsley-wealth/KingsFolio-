@@ -108,21 +108,39 @@
     </div>
   </section>
 
-  <!-- ===== Contact Section ===== -->
+ <!-- ===== Contact Section ===== -->
 <section id="contact">
   <h2>Contact Me</h2>
-  <!-- Contact Form using Netlify Forms -->
-<form name="contact" method="POST" action="/thankyou.html" data-netlify="true">
-  <input type="hidden" name="form-name" value="contact">
-  <!-- Hidden input needed for Netlify -->
-  <input type="text" name="name" placeholder="Your Name" required />
+
+  <!-- ✅ Netlify Contact Form -->
+  <form
+    id="contactForm"
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    action="/thankyou.html"
+  >
+    <!-- 🕵️ Hidden fields -->
+    <input type="hidden" name="form-name" value="contact" />
+    <p hidden>
+      <label>Don’t fill this out: <input name="bot-field" /></label>
+    </p>
+
+    <!-- 🧍 User Inputs -->
+    <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
     <textarea name="message" placeholder="Your Message" required></textarea>
-    <input type="hidden" name="_redirect" value="https://kingsfolio1.netlify.app/thankyou.html" />
+
+    <!-- ✅ Optional explicit redirect -->
+    <input
+      type="hidden"
+      name="_redirect"
+      value="https://kingsfolio1.netlify.app/thankyou.html"
+    />
 
     <button type="submit">Send Message</button>
-  </form>
-
+  </form>
 </section>
 
 
