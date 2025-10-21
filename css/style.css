@@ -226,6 +226,24 @@ form {
   flex-direction: column;
   gap: 15px;
 }
+.hidden {
+  display: none;
+}
+
+.success-msg {
+  color: #00ff99;
+  text-align: center;
+  margin-top: 15px;
+  font-weight: 500;
+  animation: fadeInOut 4s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
 
 input, textarea {
   width: 100%;

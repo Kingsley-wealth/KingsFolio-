@@ -119,39 +119,23 @@ if (menuToggle && navList) {
     });
   });
 }
-// === CONTACT FORM HANDLING (Stay on same page + Toast) ===
+// === CONTACT FORM HANDLING (Inline success message, Netlify safe) ===
 document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
-  const toast = document.getElementById("toast");
-  if (!contactForm || !toast) return;
+  const formMessage = document.getElementById("formMessage");
 
-  contactForm.addEventListener("submit", async (e) => {
-    // Let Netlify handle the submission normally
-    e.preventDefault(); // ✅ optional: handle via fetch to stay on same page
+  if (!contactForm) return;
 
-    const formData = new FormData(contactForm);
+  contactForm.addEventListener("submit", () => {
+    // Wait a bit for Netlify to handle submission
+    setTimeout(() => {
+      formMessage.classList.remove("hidden");
 
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        showToast();
-        contactForm.reset(); // clear inputs
-      } else {
-        alert("❌ There was an issue sending your message. Try again.");
-      }
-    } catch (error) {
-      console.error("Submission failed:", error);
-      alert("⚠️ Network error. Please try again later.");
-    }
+      // Hide message and reset form after 5 seconds
+      setTimeout(() => {
+        formMessage.classList.add("hidden");
+        contactForm.reset();
+      }, 5000);
+    }, 800);
   });
-
-  // 🔔 Toast animation
-  function showToast() {
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 3000);
-  }
 });
