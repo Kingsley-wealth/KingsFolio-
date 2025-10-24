@@ -139,3 +139,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 800);
   });
 });
+function downloadprogress(btn) {
+  if (btn.classList.contains("downloading")) return;
+
+  const txt = btn.querySelector(".btn-text");
+  const old = txt.innerHTML;
+  btn.classList.add("downloading");
+
+  // Show downloading animation
+  txt.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+
+  // Simulate progress for 3 seconds
+  setTimeout(() => {
+    txt.innerHTML = '<i class="fas fa-check-circle"></i> Complete!';
+
+    // Trigger actual download (auto-download your PDF)
+    const link = document.createElement("a");
+    link.href = "assets/resume5star.pdf"; // <-- your resume file path
+    link.download = "Kingsley-Resume.pdf";
+    link.click();
+
+    // Reset button after 2 seconds
+    setTimeout(() => {
+      txt.innerHTML = old;
+      btn.classList.remove("downloading");
+    }, 2000);
+  }, 3000);
+}
+
+

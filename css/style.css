@@ -94,6 +94,9 @@ nav ul li a:hover {
   transform: scale(1.05);
   box-shadow: var(--shadow-glow);
 }
+.btn i {
+  margin-right: 8px;
+}
 /* -- section layout -- */
 section {
   padding: var(--section-padding);
