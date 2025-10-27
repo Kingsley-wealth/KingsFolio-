@@ -28,21 +28,23 @@
 <body>
   <!-- ===== Header / Navbar ===== -->
   <header>
-    <nav>
-        <h2 class="logo">Port<span class="highlight">Folio</span></h2>
-
-      <ul>
-        <li><a href="#home" class="active">Home</a></li>
+    <nav class="navbar">
+      <div class="logo"> Kings<span class="highlight">Folio</span></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="#contact" class="btn">Hire Me</a>
+        
 
-      <!-- Mobile Menu Icon (for later JS toggle) -->
-      <div class="menu-toggle"><i class='bx bx-menu'></i></div>
-  
-          </nav> 
+      <!-- menu-toggle on mobile only) -->
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    </nav> 
 
   </header>
 
@@ -62,6 +64,7 @@
         <a href="https://www.linkedin.com/in/kingsley-donatus-03b144341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"><i class="bx bxl-linkedin"></i></a>
         <a href="https://github.com/Kingsley-wealth" target="_blank"><i class="bx bxl-github"></i></a>
       </div>
+      <a href="#contact" class="btn">Hire Me</a>
 
 <!-- Resume Download Button -->
 <button class="btn" onclick="downloadprogress(this)">
@@ -116,7 +119,62 @@
       </div>
     </div>
   </section>
+  <!-- ==== Skills Section ==== -->
+<section id="skills" class="skills-section reveal">
+  <h2 class="section-title">Skills & Expertise</h2>
+  <p class="section-subtitle">A blend of design intuition and technical expertise.</p>
 
+  <div class="skills-container">
+    <!-- HTML & CSS -->
+    <div class="skill">
+      <div class="skill-info">
+        <h3><i class="fab fa-html5"></i> HTML & CSS</h3>
+        <span class="percent">90%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" style="width: 90%"></div>
+      </div>
+      <p>Building responsive, accessible, and semantic layouts that adapt beautifully.</p>
+    </div>
+
+    <!-- JavaScript -->
+    <div class="skill">
+      <div class="skill-info">
+        <h3><i class="fab fa-js-square"></i> JavaScript</h3>
+        <span class="percent">65%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" style="width: 65%"></div>
+      </div>
+      <p>Interactive front-end logic, animations, and smooth UI experiences.</p>
+    </div>
+
+    <!-- React -->
+    <div class="skill">
+      <div class="skill-info">
+        <h3><i class="fab fa-react"></i> React (Learning)</h3>
+        <span class="percent">40%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" style="width: 40%"></div>
+      </div>
+      <p>Component-based design and reusable UI architecture for scalable apps.</p>
+    </div>
+
+    <!-- UI/UX -->
+    <div class="skill">
+      <div class="skill-info">
+        <h3><i class="fas fa-pencil-ruler"></i> UI/UX Design</h3>
+        <span class="percent">40%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress" style="width: 40%"></div>
+      </div>
+      <p>Crafting clean, intuitive, and visually consistent interfaces for users.</p>
+    </div>
+  </div>
+</section>
+ 
 <!-- ===== Contact Section ===== -->
 <section id="contact">
   <h2>Contact Me</h2>

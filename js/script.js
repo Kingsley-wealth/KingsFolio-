@@ -64,7 +64,7 @@ window.addEventListener("load", revealOnScroll);
 
 /* ---------- NAV ACTIVE ON SCROLL ---------- */
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-links a");
+const navLinks = document.querySelectorAll("nav ul a");
 
 function navActiveOnScroll() {
   let scrollY = window.pageYOffset;
@@ -74,19 +74,30 @@ function navActiveOnScroll() {
     const sectionHeight = section.offsetHeight;
     const sectionId = section.getAttribute("id");
 
-    if (scrollY >= sectionTop + sectionHeight&& scrollY < sectionTop + sectionHeight) {
-      navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${sectionId}`) { link.classList.add("active");
-        }
-          
-        
+     if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          navAnchors.forEach(link => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${sectionId}`);
       });
     }
   });
 }
 window.addEventListener("scroll", navActiveOnScroll);
 window.addEventListener("load", navActiveOnScroll);
+
+    /* ---------- Optional: Close mobile menu on resize to desktop ---------- */
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        // ensure nav visible in desktop and reset mobile states
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        const icon = menuToggle.querySelector("i");
+        if (icon) {
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-times");
+        }
+      }
+    });
+
 
 /* ---------- SCROLL-TOP BUTTON ---------- */
 const scrollTopBtn = document.querySelector(".scroll-top");
@@ -102,23 +113,36 @@ window.addEventListener("scroll", toggleScrollTop);
 window.addEventListener("load", toggleScrollTop);
 
 /* ---------- MOBILE MENU TOGGLE ---------- */
-const menuToggle = document.querySelector(".menu-toggle");
-const navList = document.querySelector("nav ul li a");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
 
-if (menuToggle && navList) {
+
+if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
-    navList.classList.toggle("open");
-    menuToggle.classList.toggle("open");
+    navLinks.classList.toggle("active");
+    
+    // swap icon
+    const icon = menuToggle.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+
   });
 
+
   // close menu on link click (mobile)
-  navList.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => {
-      navList.classList.remove("open");
-      menuToggle.classList.remove("open");
+  navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (navLinks.classList.contains("active")) {
+      navLinks.classList.remove("active");
+      const icon = menuToggle.querySelector("i");
+      icon.classList.add("fa-bars");
+      icon.classList.remove("fa-times");
+    }
     });
   });
 }
+});
 // === CONTACT FORM HANDLING (Inline success message, Netlify safe) ===
 document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
@@ -155,7 +179,7 @@ function downloadprogress(btn) {
 
     // Trigger actual download (auto-download your PDF)
     const link = document.createElement("a");
-    link.href = "assets/resume5star.pdf"; // <-- your resume file path
+    link.href = "assets/1resume5star.pdf"; // <-- your resume file path
     link.download = "Kingsley-Resume.pdf";
     link.click();
 
@@ -166,5 +190,16 @@ function downloadprogress(btn) {
     }, 2000);
   }, 3000);
 }
+const progressBars = document.querySelectorAll('.progress');
 
+const showProgress = () => {
+  const triggerBottom = window.innerHeight * 0.8;
+  progressBars.forEach(bar => {
+    const barTop = bar.getBoundingClientRect().top;
+    if (barTop < triggerBottom) {
+      bar.style.width = bar.getAttribute('style').split(':')[1];
+    }
+  });
+};
 
+window.addEventListener('scroll', showProgress);

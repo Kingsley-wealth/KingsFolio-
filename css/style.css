@@ -13,8 +13,7 @@
 margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
-  font-family: 'Poppins', sans-serif;
+  font-family:  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 body {
     background-color: var(--bg-color);
@@ -25,17 +24,19 @@ body {
 color: var(--accent-color)
 }
 /* === FIX: Nav styling connection === */
+header {position: relative}
 nav {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 25px 8%;
+  padding: 18px 6%;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 1000;
   background: rgba(6, 7, 23, 0.85);
-  transition: var(--transition);
+    backdrop-filter: blur(6px);
 }
 .nav.scrolled {
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
@@ -49,17 +50,20 @@ nav {
     color: var(--accent-color);
 }
 nav ul {
-    display: flex;
+  display:flex;
     list-style: none;
     gap: 50px;
     justify-content: flex-start;
     align-items: center;
+
 }
 nav ul li a {
  color: var(--text-color);
  text-decoration: none;
  font-weight: 500; 
  transition: var(--transition);
+ padding: 6px 4px;
+ display: inline-block;
 
 }
 nav ul li a::after{
@@ -78,6 +82,49 @@ width: 100%;
 nav ul li a:hover {
   color: #66dde8;
 }
+/* === .menu-toggle- hidden on desktop === */
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  border: none;
+  color: var(--text-color);
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  transition: var(--transition);
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+ .menu-toggle {
+    display: block; /* Show hamburger */
+  }
+/* Hide nav ul li a by default on mobile */
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: -100%;
+    background: rgba(10, 10, 25, 0.95);
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px;
+     box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+     gap:10px;
+  }
+  .nav-links.active {
+    right: 0;
+  }
+}
+
+  
+      /* Ensure the underline sits correctly on mobile */
+      nav ul li a::after { bottom: 8px; }
+  
+
+
+  
 /* -- Button -- */
 .btn {
   display: inline-block;
@@ -104,6 +151,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  scroll-margin-top: 75px;
 }
 
 /* === Reveal Animation === */
@@ -350,4 +398,71 @@ footer {
       animation: blink 0.7s infinite
   }
 
+}
+html {
+  scroll-behavior: auto;
+}
+  /*====skill section====*/
+/* ========== Skills Section ========== */
+.skills-section {
+  background: var(--bg-color, #f9f9f9);
+  padding: 100px 10%;
+  text-align: center;
+}
+
+.skills-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color, #222);
+  margin-bottom: 10px;
+}
+
+.skills-section p .section-subtitle {
+  color: #777;
+  font-size: 1rem;
+  margin-bottom: 50px;
+}
+
+.skill {
+  margin-bottom: 25px;
+  text-align: left;
+}
+.skill h3 i  {
+   margin-right: 8px;
+  color: var(--accent-color);
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.skill-info h3 {
+  font-weight: 600;
+  color: var(--text-color, #333);
+}
+
+.skill-info .percent {
+  color: #555;
+  font-weight: 500;
+}
+
+.progress-bar {
+  background: #ddd;
+  height: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin : 8px o;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #0078ff, #00c3ff);
+  border-radius: 20px;
+  transition: width 0.6s ease;
+}
+.skill p{
+    font-size: 0.9rem;
+  color: #bbb;
 }
